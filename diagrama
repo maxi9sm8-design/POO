@@ -1,0 +1,46 @@
++-----------------------------------------------------------------------------------+
+|                             COTIZACION DE VEHICULOS                               |
+|                                                                                   |
+|                                                                                   |
++-----------------------------------------------------------------------------------+
+| + marca: str                                                                      |
+| + modelo: str                                                                     |
+| + personas: int                                                                   |
+| + traccion: str                                                                   |
+| + rendimiento: float                                                              |
+| - __precio_diario: float                                                          |
++-----------------------------------------------------------------------------------+
+| + __init__(marca, modelo, precio, personas, traccion, rendimiento)                |
+| + precio_diario(): float  <<Property Getter>>                                     |
+| + precio_diario(valor: float): void  <<Property Setter>>                          |
+| + calcular_cotizacion(dias: int, pasajeros: int = 0): float <<Abstract>>          |
+| + mostrar_ficha(): void                                                           |
++-----------------------------------------------------------------------------------+
+                                         ^
+                                         |
+    +-----------------------+------------+------------+-----------------------+
+    |                       |                         |                       |
++---+-------------------+ +-+-------------------+ +---+-------------------+ +-+-------------------+
+| MÓDULO: auto_suv.py   | | MÓDULO: camioneta.py| |  MÓDULO: camion.py    | | MÓDULO:transporte.py|
+|       AutoSuv         | |     Camioneta       | |       Camion          | |     Transporte      |
++-----------------------+ +---------------------+ +---------------------+ +---------------------+
+| + MODELOS: dict {S}   | | + MODELOS: dict {S} | | + MODELOS: dict {S}   | | + MODELOS: dict {S} |
+|                       | | + seguro: float     | | + impuesto: float     | |                     |
++-----------------------+ +---------------------+ +---------------------+ +-----------------------+
+| + __init__(...)       | | + __init__(...,     | | + __init__(...,       | | + __init__(...)     |
+| + calcular_cotizacion(| |   seguro=12000)     | |   impuesto=25000)     | | + calcular_cotizacion|
+|   dias, pasajeros):   | | + calcular_cotizacion| | + calcular_cotizacion| |   (dias, pasajeros):|
+|   float               | |   (dias, pasajeros) | |   (dias, pasajeros)   | |   float             |
++-----------------------+ +---------------------+ +---------------------+ +-----------------------+
+                                     ^
+                                     | (importa todas las subclases)
+                                     |
+                          +---------------------+
+                          |  MÓDULO: main.py    |
+                          |   SistemaAlquiler   |
+                          +---------------------+
+                          |                     |
+                          +---------------------+
+                          | + crear_vehiculo()  |
+                          | + iniciar(): void   |
+                          +---------------------+
